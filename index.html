@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Balance</title>
+</head>
+<body>
+    <div style="display: flex;">
+        <div>
+            <canvas id="c"></canvas>
+        </div>
+        <div style="margin-left: 20px; padding: 20px;">
+            <div>
+                Color
+            </div>
+            <input id="r" name="r" type="range" min="0" max="255">
+            <label for="r">Red - <span id="rv">255</span></label>
+            <br>
+            <br>
+            <input id="g" name="g" type="range" min="0" max="255">
+            <label for="g">Green - <span id="gv">255</span></label>
+            <br>
+            <br>
+            <input id="b" name="b" type="range" min="0" max="255">
+            <label for="b">Blue - <span id="bv">255</span></label>
+            <br>
+            <br>
+            <input id="f" type="file" accept="image/*">
+        </div>
+        <div style="margin-left: 20px; padding: 20px;">
+            <div>
+                Tone
+            </div>
+            <input id="rw" name="r" type="range" min="0" max="1" step="0.01">
+            <label for="rw">R - <span id="rwv">0</span></label>
+            <br>
+            <br>
+            <input id="gw" name="g" type="range" min="0" max="1" step="0.01">
+            <label for="gw">G - <span id="gwv">0</span></label>
+            <br>
+            <br>
+            <input id="bw" name="b" type="range" min="0" max="1" step="0.01">
+            <label for="bw">B - <span id="bwv">0</span></label>
+            <br>
+            <br>
+            <input id="aw" name="a" type="range" min="0" max="1" step="0.01">
+            <label for="aw">A - <span id="awv">0</span></label>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
