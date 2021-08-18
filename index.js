@@ -1,20 +1,16 @@
 'use strict';
 
-function set_input_value_and_render(input_id_string, item, canvas, image) {
-    document.getElementById(input_id_string).innerText = item.value;
+/**
+ * Sets the html label value and calls to render
+ * @param {string} label_id_string
+ * @param {string} value
+ * @param {HTMLCanvasElement} canvas
+ * @param {Image} image
+ * @returns {undefined}
+ */
+function set_input_value_and_render(label_id_string, value, canvas, image) {
+    document.getElementById(label_id_string).innerText = value;
     render(canvas, image);
-}
-
-function getWhites() {
-    const r_white = document.getElementById('rw');
-    const g_white = document.getElementById('gw');
-    const b_white = document.getElementById('bw');
-    const a_white = document.getElementById('aw');
-    return [r_white, g_white, b_white, a_white];
-}
-
-function getWhiteOffset() {
-    return getWhites().map(w => w.value);
 }
 
 function getRanges() {
@@ -24,8 +20,19 @@ function getRanges() {
     return [r_range, g_range, b_range];
 }
 
-function getRGB() {
-    return getRanges().map(r => r.value / 255);
+function getColors() {
+    const ranges = getRanges();
+    for (const range of ranges) {
+        const value = parseFloat(range.value);
+        if (value <= 0.0) {
+            range.color = (255.0 + value) / 255.0;
+            range.white = 0.0;
+        } else {
+            range.color = 1.0;
+            range.white = 1.0 + (value - 255.0) / 255.0;
+        }
+    }
+    return ranges;
 }
 
 function setRectangle(gl, x, y, width, height) {
@@ -177,11 +184,11 @@ void main() {
     gl.uniform2f(resolutionLocation, gl.canvas.width, gl.canvas.height);
     gl.uniform1i(imageLocation, 0);
 
-    const [r, g, b] = getRGB();
-    gl.uniform4f(colorLocation, r, g, b, 1.0);
-
-    const [rw, gw, bw, aw] = getWhiteOffset();
-    gl.uniform4f(whiteOffsetLocation, rw, gw, bw, aw);
+    const [r, g, b] = getColors();
+    console.log(r.color, g.color, b.color);
+    console.log(r.white, g.white, b.white);
+    gl.uniform4f(colorLocation, r.color, g.color, b.color, 1.0);
+    gl.uniform4f(whiteOffsetLocation, r.white, g.white, b.white, 0.0);
 
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
@@ -202,35 +209,15 @@ window.onload = () => {
         render(canvas, image);
     }
 
-    const ranges = getRanges();
-    const [r_range, g_range, b_range] = ranges;
-    for (const range of ranges)
-        range.value = 255;
+    const [r_range, g_range, b_range] = getRanges();
     r_range.addEventListener('input', () => {
-        set_input_value_and_render('rv', r_range, canvas, image);
+        set_input_value_and_render('rv', r_range.value, canvas, image);
     });
     g_range.addEventListener('input', () => {
-        set_input_value_and_render('gv', g_range, canvas, image);
+        set_input_value_and_render('gv', g_range.value, canvas, image);
     });
     b_range.addEventListener('input', () => {
-        set_input_value_and_render('bv', b_range, canvas, image);
-    });
-
-    const whites = getWhites();
-    for (const w of whites)
-        w.value = 0;
-    const [r_white, g_white, b_white, a_white] = whites;
-    r_white.addEventListener('input', () => {
-        set_input_value_and_render('rwv', r_white, canvas, image);
-    });
-    g_white.addEventListener('input', () => {
-        set_input_value_and_render('gwv', g_white, canvas, image);
-    });
-    b_white.addEventListener('input', () => {
-        set_input_value_and_render('bwv', b_white, canvas, image);
-    });
-    a_white.addEventListener('input', () => {
-        set_input_value_and_render('awv', a_white, canvas, image);
+        set_input_value_and_render('bv', b_range.value, canvas, image);
     });
 
     const file_input = document.getElementById('f');
