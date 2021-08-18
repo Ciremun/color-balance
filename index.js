@@ -223,8 +223,6 @@ void main() {
     gl.uniform1i(imageLocation, 0);
 
     const [r, g, b] = getColors();
-    console.log(r.color, g.color, b.color);
-    console.log(r.white, g.white, b.white);
     gl.uniform4f(colorLocation, r.color, g.color, b.color, 1.0);
     gl.uniform4f(whiteOffsetLocation, r.white, g.white, b.white, 0.0);
 
