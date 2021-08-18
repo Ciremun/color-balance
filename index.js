@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Sets the html label value and calls to render
+ * Set the html label value and calls to render
  * @param {string} label_id_string
  * @param {string} value
  * @param {HTMLCanvasElement} canvas
@@ -13,6 +13,10 @@ function set_input_value_and_render(label_id_string, value, canvas, image) {
     render(canvas, image);
 }
 
+/**
+ * Get the range input elements
+ * @returns {Array[HTMLInputElement]}
+ */
 function getRanges() {
     const r_range = document.getElementById('r');
     const g_range = document.getElementById('g');
@@ -20,6 +24,10 @@ function getRanges() {
     return [r_range, g_range, b_range];
 }
 
+/**
+ * Convert range values to RGB color + white offset
+ * @returns {Array[HTMLInputElement]}
+ */
 function getColors() {
     const ranges = getRanges();
     for (const range of ranges) {
@@ -29,12 +37,21 @@ function getColors() {
             range.white = 0.0;
         } else {
             range.color = 1.0;
-            range.white = 1.0 + (value - 255.0) / 255.0;
+            range.white = 1.0 + ((value - 255.0) / 255.0);
         }
     }
     return ranges;
 }
 
+/**
+ * Fill the bound buffer with a rectanlle of specified size
+ * @param {WebGL2RenderingContext} gl
+ * @param {number} x
+ * @param {number} y
+ * @param {number} width
+ * @param {number} height
+ * @returns {undefined}
+ */
 function setRectangle(gl, x, y, width, height) {
     const x1 = x;
     const x2 = x + width;
@@ -50,10 +67,18 @@ function setRectangle(gl, x, y, width, height) {
     ]), gl.STATIC_DRAW);
 }
 
+/**
+ * Fill the bound buffer
+ * @param {WebGL2RenderingContext} gl
+ * @param {number} type shader type
+ * @param {number} source shader source code
+ * @returns {WebGLShader}
+ */
 function createShader(gl, type, source) {
     const shader = gl.createShader(type);
     if (shader === null) {
         alert('shader compilation failed');
+        return;
     }
     gl.shaderSource(shader, source);
     gl.compileShader(shader);
@@ -65,6 +90,13 @@ function createShader(gl, type, source) {
     gl.deleteShader(shader);
 }
 
+/**
+ * Create a gl program from shaders
+ * @param {WebGL2RenderingContext} gl
+ * @param {WebGLShader} vertexShader
+ * @param {WebGLShader} fragmentShader
+ * @returns {undefined}
+ */
 function createProgram(gl, vertexShader, fragmentShader) {
     const program = gl.createProgram();
     if (program === null) {
@@ -81,6 +113,12 @@ function createProgram(gl, vertexShader, fragmentShader) {
     gl.deleteProgram(program);
 }
 
+/**
+ * Render the image
+ * @param {HTMLCanvasElement} canvas
+ * @param {Image} image
+ * @returns {undefined}
+ */
 function render(canvas, image) {
     canvas.width = image.width;
     canvas.height = image.height;
