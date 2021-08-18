@@ -278,16 +278,14 @@ window.onload = () => {
         reader.readAsDataURL(file);
     });
 
-    const saveBlob = () => {
+    const saveBlob = (blob, filename) => {
+        const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         document.body.appendChild(a);
         a.style.display = 'none';
-        return (blob, filename) => {
-            const url = window.URL.createObjectURL(blob);
-            a.href = url;
-            a.download = filename;
-            a.click();
-        };
+        a.href = url;
+        a.download = filename;
+        a.click();
     };
 
     const dl = document.getElementById('dl');
