@@ -95,7 +95,7 @@ function createShader(gl, type, source) {
  * @param {WebGL2RenderingContext} gl
  * @param {WebGLShader} vertexShader
  * @param {WebGLShader} fragmentShader
- * @returns {undefined}
+ * @returns {WebGLProgram}
  */
 function createProgram(gl, vertexShader, fragmentShader) {
     const program = gl.createProgram();
