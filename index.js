@@ -93,7 +93,7 @@ function getColor(value) {
 }
 
 /**
- * Fill the bound buffer with a rectanlle of specified size
+ * Fill the bound buffer with a rectangle of specified size
  * @param {WebGL2RenderingContext} gl
  * @param {number} x
  * @param {number} y
