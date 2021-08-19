@@ -247,13 +247,13 @@ window.onload = () => {
 
     const [r_range, g_range, b_range] = getRanges();
     r_range.addEventListener('input', () => {
-        set_input_value_and_render('rv', r_range.value, canvas, image);
+        set_input_value_and_render('rv', (r_range.value / 255.0 * 100).toFixed(1), canvas, image);
     });
     g_range.addEventListener('input', () => {
-        set_input_value_and_render('gv', g_range.value, canvas, image);
+        set_input_value_and_render('gv', (g_range.value / 255.0 * 100).toFixed(1), canvas, image);
     });
     b_range.addEventListener('input', () => {
-        set_input_value_and_render('bv', b_range.value, canvas, image);
+        set_input_value_and_render('bv', (b_range.value / 255.0 * 100).toFixed(1), canvas, image);
     });
 
     const file_input = document.getElementById('f');
