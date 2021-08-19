@@ -56,25 +56,21 @@ function getRadioButtons() {
  * @returns {undefined}
  */
 function setRanges() {
-    const ranges = getRanges();
-    const [r_range, g_range, b_range] = ranges;
+    const [r_range, g_range, b_range] = getRanges();
     const [r_label, g_label, b_label] = getLabels();
     const rgb = colors[mode];
+    r_range.value = rgb.r;
+    g_range.value = rgb.g;
+    b_range.value = rgb.b;
     if (rgb.r !== 0 || rgb.g !== 0 || rgb.b !== 0) {
-        r_range.value = rgb.r;
-        g_range.value = rgb.g;
-        b_range.value = rgb.b;
-        r_label.innerText = rangeValueToPercent(r_range.value);
-        g_label.innerText = rangeValueToPercent(g_range.value);
-        b_label.innerText = rangeValueToPercent(b_range.value);
-        return;
+        r_label.innerText = rangeValueToPercent(rgb.r);
+        g_label.innerText = rangeValueToPercent(rgb.b);
+        b_label.innerText = rangeValueToPercent(rgb.g);
+    } else {
+        r_label.innerText = '0.0';
+        g_label.innerText = '0.0';
+        b_label.innerText = '0.0';
     }
-    for (const range of ranges) {
-        range.value = 0;
-    }
-    r_label.innerText = '0.0';
-    g_label.innerText = '0.0';
-    b_label.innerText = '0.0';
 }
 
 /**
