@@ -68,7 +68,7 @@ function setRectangle(gl, x, y, width, height) {
 }
 
 /**
- * Fill the bound buffer
+ * Create a shader program from source
  * @param {WebGL2RenderingContext} gl
  * @param {number} type shader type
  * @param {number} source shader source code
