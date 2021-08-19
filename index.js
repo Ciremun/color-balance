@@ -8,10 +8,19 @@ const colors = {
 
 let mode = 'midtones';
 
+/**
+ * Convert input range value to percent
+ * @param {string} value
+ * @returns {string}
+ */
 function rangeValueToPercent(value) {
     return (value / 255.0 * 100).toFixed(1);
 }
 
+/**
+ * Get range label elements
+ * @returns {HTMLLabelElement[]}
+ */
 function getLabels() {
     const r_label = document.getElementById('r_label');
     const g_label = document.getElementById('g_label');
@@ -20,8 +29,8 @@ function getLabels() {
 }
 
 /**
- * Get the range input elements
- * @returns {Array[HTMLInputElement]}
+ * Get range input elements
+ * @returns {HTMLInputElement[]}
  */
 function getRanges() {
     const r_range = document.getElementById('r');
@@ -30,6 +39,10 @@ function getRanges() {
     return [r_range, g_range, b_range];
 }
 
+/**
+ * Get radiobutton input elements
+ * @returns {HTMLInputElement[]}
+ */
 function getRadioButtons() {
     const shadows = document.getElementById('shadows');
     const midtones = document.getElementById('midtones');
@@ -37,6 +50,11 @@ function getRadioButtons() {
     return [shadows, midtones, highlights];
 }
 
+/**
+ * Set range values for input and label elements
+ * from 'colors' global var on mode change
+ * @returns {undefined}
+ */
 function setRanges() {
     const ranges = getRanges();
     const [r_range, g_range, b_range] = ranges;
@@ -61,7 +79,7 @@ function setRanges() {
 
 /**
  * Convert range values to RGB color + white offset
- * @returns {Array[HTMLInputElement]}
+ * @returns {HTMLInputElement[]}
  */
 function getColor(value) {
     let f = parseFloat(value);
@@ -204,7 +222,7 @@ vec3 color_balance(vec3 textureColor)
 }
 
 void main() {
-    lowp vec4 textureColor = texture(u_image, v_texCoord);
+    vec4 textureColor = texture(u_image, v_texCoord);
     textureColor.rgb = color_balance(textureColor.rgb);
     outColor = textureColor;
 }
