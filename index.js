@@ -64,8 +64,8 @@ function setRanges() {
     b_range.value = rgb.b;
     if (rgb.r !== 0 || rgb.g !== 0 || rgb.b !== 0) {
         r_label.innerText = rangeValueToPercent(rgb.r);
-        g_label.innerText = rangeValueToPercent(rgb.b);
-        b_label.innerText = rangeValueToPercent(rgb.g);
+        g_label.innerText = rangeValueToPercent(rgb.g);
+        b_label.innerText = rangeValueToPercent(rgb.b);
     } else {
         r_label.innerText = '0.0';
         g_label.innerText = '0.0';
