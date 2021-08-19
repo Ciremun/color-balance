@@ -79,6 +79,7 @@ function setRanges() {
 
 /**
  * Convert range values to RGB color + white offset
+ * @param {string} value
  * @returns {HTMLInputElement[]}
  */
 function getColor(value) {
