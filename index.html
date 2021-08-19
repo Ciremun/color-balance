@@ -7,30 +7,77 @@
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <title>Color Balance</title>
 </head>
+<style>
+    /* http://meyerweb.com/eric/tools/css/reset/ 
+       v2.0 | 20110126
+       License: none (public domain)
+    */
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    b, u, i, center,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td,
+    article, aside, canvas, details, embed, 
+    figure, figcaption, footer, header, hgroup, 
+    menu, nav, output, ruby, section, summary,
+    time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+    article, aside, details, figcaption, figure, 
+    footer, header, hgroup, menu, nav, section {
+        display: block;
+    }
+    body {
+        line-height: 1;
+        font-size: 1.2em;
+        user-select: none;
+    }
+    .flex-container {
+        display: flex;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+    }
+</style>
 <body>
     <div style="display: flex;">
         <div>
             <canvas id="c"></canvas>
         </div>
         <div style="margin-left: 20px; padding: 20px;">
-            <div>
-                Color (Midtones)
+            <input id="shadows" name="mode_radiobutton" type="radio">
+            <label class="no-select" for="shadows">Shadows</label><br>
+            <input id="midtones" name="mode_radiobutton" type="radio" checked>
+            <label class="no-select" for="midtones">Midtones</label><br>
+            <input id="highlights" name="mode_radiobutton" type="radio">
+            <label class="no-select" for="highlights">Highlights</label>
+            <div class="flex-container">
+                <div>
+                    <label for="r">Cyan</label><br>
+                    <label for="g">Magenta</label><br>
+                    <label for="b">Yellow</label>
+                </div>
+                <div>
+                    <input id="r" name="r" type="range" min="-255" max="255" step="0.1"><br>
+                    <input id="g" name="g" type="range" min="-255" max="255" step="0.1"><br>
+                    <input id="b" name="b" type="range" min="-255" max="255" step="0.1">
+                </div>
+                <div>
+                    <label for="r">Red <span id="r_label">0.0</span></label><br>
+                    <label for="g">Green <span id="g_label">0.0</span></label><br>
+                    <label for="b">Blue <span id="b_label">0.0</span></label>
+                </div>
             </div>
-            <input id="r" name="r" type="range" min="-255" max="255" step="0.1">
-            <label for="r">Red = <span id="rv">0</span></label>
-            <br>
-            <br>
-            <input id="g" name="g" type="range" min="-255" max="255" step="0.1">
-            <label for="g">Green = <span id="gv">0</span></label>
-            <br>
-            <br>
-            <input id="b" name="b" type="range" min="-255" max="255" step="0.1">
-            <label for="b">Blue = <span id="bv">0</span></label>
-            <br>
-            <br>
-            <input id="f" type="file" accept="image/*">
-            <br>
-            <br>
+            <input id="f" type="file" accept="image/*"><br>
             <button id="dl" type="button">Download</button>
         </div>
     </div>
