@@ -8,7 +8,7 @@
  * @param {Image} image
  * @returns {undefined}
  */
-function set_input_value_and_render(label_id_string, value, canvas, image) {
+function set_label_value_and_render(label_id_string, value, canvas, image) {
     document.getElementById(label_id_string).innerText = value;
     render(canvas, image);
 }
@@ -247,13 +247,13 @@ window.onload = () => {
 
     const [r_range, g_range, b_range] = getRanges();
     r_range.addEventListener('input', () => {
-        set_input_value_and_render('rv', (r_range.value / 255.0 * 100).toFixed(1), canvas, image);
+        set_label_value_and_render('rv', (r_range.value / 255.0 * 100).toFixed(1), canvas, image);
     });
     g_range.addEventListener('input', () => {
-        set_input_value_and_render('gv', (g_range.value / 255.0 * 100).toFixed(1), canvas, image);
+        set_label_value_and_render('gv', (g_range.value / 255.0 * 100).toFixed(1), canvas, image);
     });
     b_range.addEventListener('input', () => {
-        set_input_value_and_render('bv', (b_range.value / 255.0 * 100).toFixed(1), canvas, image);
+        set_label_value_and_render('bv', (b_range.value / 255.0 * 100).toFixed(1), canvas, image);
     });
 
     const file_input = document.getElementById('f');
